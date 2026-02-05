@@ -1,0 +1,9 @@
+<nav class="text-sm text-gray-500 mb-4">
+  <span 
+    class="inline-flex items-center"
+    *ngFor="let crumb of breadcrumbs(); let last = last"
+  >
+    <span class="capitalize">{{ crumb }}</span>
+    <span *ngIf="!last"> / </span>
+  </span>
+</nav>

@@ -1,0 +1,52 @@
+<header class="w- h-[var(--header-height)] dark:bg-[#020617] shadow flex items-center justify-between px-4 lg:px-6">
+  <!-- Left : toggle sidebar + titre -->
+  <div class="flex items-center gap-3">
+    <!-- Mobile toggle -->
+    <button
+      class="lg:hidden p-2 rounded hover:bg-gray-100 dark:hover:bg-white/10 transition"
+      (click)="toggleSidebar.emit()"
+    >
+      ☰
+    </button>
+
+    <!-- Desktop toggle (collapse sidebar) -->
+    <button
+      class="hidden lg:inline-block p-2 rounded hover:bg-gray-100 dark:hover:bg-white/10 transition"
+      (click)="toggleSidebar.emit()"
+    >
+      ⬅️/➡️
+    </button>
+
+    <!-- Titre -->
+    <span class="font-semibold text-lg text-gray-900 dark:text-gray-50">
+      Gest-Entreprise
+    </span>
+  </div>
+
+  <!-- Right : actions + profil -->
+  <div class="flex items-center gap-4">
+    <!-- Toggle thème -->
+    <button
+      class="p-2 rounded hover:bg-gray-100 dark:hover:bg-white/10 transition"
+      (click)="toggleTheme()"
+    >
+      🌙
+    </button>
+
+    <!-- Notifications -->
+    <button class="relative p-2 rounded hover:bg-gray-100 dark:hover:bg-white/10 transition">
+      🔔
+      <span
+        class="absolute -top-1 -right-1 bg-[var(--color-primary)] text-white text-xs px-1 rounded-full"
+      >
+        3
+      </span>
+    </button>
+
+    <!-- Profil utilisateur -->
+    <div class="flex items-center gap-2">
+      <div class="w-8 h-8 rounded-full bg-gray-300"></div>
+      <span class="text-sm font-medium text-gray-900 dark:text-gray-50">Alexandre</span>
+    </div>
+  </div>
+</header>
