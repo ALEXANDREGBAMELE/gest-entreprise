@@ -1,8 +1,9 @@
+import { CommonModule } from '@angular/common';
 import { Component, computed, inject } from '@angular/core';
 import { Router } from '@angular/router';
 @Component({
   selector: 'app-breadcrumb',
-  imports: [],
+  imports: [CommonModule],
   templateUrl: './breadcrumb.html',
   styleUrl: './breadcrumb.css',
 })

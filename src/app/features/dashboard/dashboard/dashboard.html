@@ -1,3 +1,108 @@
-<div class="bg-red-500 h-screen"  >
-<h1 class="">Hello Dashboard</h1>
-</div>
+<section class="space-y-8">
+
+  <!-- Header -->
+  <div class="flex flex-col lg:flex-row justify-between gap-4">
+    <div>
+      <h1 class="text-2xl font-semibold
+        text-[var(--color-text)]
+        dark:text-gray-100">
+        Dashboard
+      </h1>
+      <p class="text-[var(--color-text-muted)] dark:text-gray-400">
+        Vue d'ensemble de l'activité
+      </p>
+    </div>
+
+    <button
+      class="px-4 py-2 rounded-lg
+      bg-[var(--color-primary)] text-white
+      hover:bg-orange-600
+      transition transform hover:-translate-y-0.5
+      dark:shadow-orange-500/20">
+      + Nouvelle facture
+    </button>
+  </div>
+
+  <!-- KPI Cards -->
+  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+    <div *ngFor="let stat of stats"
+      class="rounded-xl p-5
+      bg-white dark:bg-gray-800
+      shadow-sm hover:shadow-md
+      dark:shadow-black/30
+      transition-all duration-300
+      hover:-translate-y-1 group">
+
+      <div class="flex items-center justify-between">
+        <div>
+          <p class="text-sm text-[var(--color-text-muted)] dark:text-gray-400">
+            {{ stat.title }}
+          </p>
+          <p class="text-xl font-semibold
+            text-[var(--color-text)]
+            dark:text-gray-100 mt-1">
+            {{ stat.value }}
+          </p>
+        </div>
+
+        <div
+          class="w-12 h-12 flex items-center justify-center rounded-lg
+          bg-orange-50 dark:bg-orange-500/10
+          text-[var(--color-primary)]
+          group-hover:scale-110 transition">
+          <i [class]="stat.icon + ' text-2xl'"></i>
+        </div>
+      </div>
+
+      <p class="text-sm mt-3 text-green-600 dark:text-green-400">
+        {{ stat.trend }} ce mois
+      </p>
+    </div>
+  </div>
+
+  <!-- Charts + Activity -->
+  <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+
+    <!-- Chart -->
+    <div
+      class="lg:col-span-2 rounded-xl p-6
+      bg-white dark:bg-gray-800
+      shadow-sm dark:shadow-black/30">
+      <h2 class="font-semibold mb-4 text-gray-800 dark:text-gray-100">
+        Revenus mensuels
+      </h2>
+
+      <div
+        class="h-64 flex items-center justify-center
+        text-gray-400 dark:text-gray-500">
+        📊 Intégrer ECharts ici
+      </div>
+    </div>
+
+    <!-- Activity -->
+    <div
+      class="rounded-xl p-6
+      bg-white dark:bg-gray-800
+      shadow-sm dark:shadow-black/30">
+      <h2 class="font-semibold mb-4 text-gray-800 dark:text-gray-100">
+        Activité récente
+      </h2>
+
+      <ul class="space-y-4">
+        <li class="flex items-center gap-3 text-gray-700 dark:text-gray-300">
+          <i class="ri-file-add-line text-[var(--color-primary)]"></i>
+          <span class="text-sm">Facture #458 créée</span>
+        </li>
+        <li class="flex items-center gap-3 text-gray-700 dark:text-gray-300">
+          <i class="ri-user-add-line text-[var(--color-primary)]"></i>
+          <span class="text-sm">Nouveau client ajouté</span>
+        </li>
+        <li class="flex items-center gap-3 text-gray-700 dark:text-gray-300">
+          <i class="ri-check-line text-[var(--color-primary)]"></i>
+          <span class="text-sm">Paiement reçu</span>
+        </li>
+      </ul>
+    </div>
+
+  </div>
+</section>

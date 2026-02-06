@@ -1,52 +1,166 @@
-<header class="w- h-[var(--header-height)] dark:bg-[#020617] shadow flex items-center justify-between px-4 lg:px-6">
-  <!-- Left : toggle sidebar + titre -->
-  <div class="flex items-center gap-3">
+<header
+  class="
+    w-full h-[var(--header-height)]
+    bg-[var(--color-surface)]
+    
+    flex items-center justify-between
+    px-2 lg:px-2
+    transition-colors duration-300
+  "
+>
+  <!-- LEFT -->
+  <div class="flex items-center gap-4">
+
     <!-- Mobile toggle -->
     <button
-      class="lg:hidden p-2 rounded hover:bg-gray-100 dark:hover:bg-white/10 transition"
-      (click)="toggleSidebar.emit()"
+      class="
+        lg:hidden p-2 rounded-lg
+        text-[var(--color-text-muted)]
+        hover:bg-gray-200
+        hover:text-[var(--color-primary)]
+        hover:shadow-sm
+        transition-all duration-200
+        transform hover:-translate-y-[1px] hover:scale-105
+      "
+      (click)="toggleSidebarMobile.emit()"
+      aria-label="Toggle mobile sidebar"
     >
-      ☰
+      <i class="ri-menu-line text-2xl"></i>
     </button>
 
-    <!-- Desktop toggle (collapse sidebar) -->
+    <!-- Desktop toggle -->
     <button
-      class="hidden lg:inline-block p-2 rounded hover:bg-gray-100 dark:hover:bg-white/10 transition"
-      (click)="toggleSidebar.emit()"
+      class="
+        hidden lg:inline-flex p-2 rounded-lg
+        text-[var(--color-text-muted)]
+        hover:bg-gray-200
+        hover:text-[var(--color-primary)]
+        hover:shadow-sm
+        transition-all duration-200
+        transform hover:-translate-y-[1px] hover:scale-105
+      "
+      (click)="toggleSidebar.emit(); sidebarOpen = !sidebarOpen"
+      aria-label="Collapse or Expand sidebar"
     >
-      ⬅️/➡️
+      <i
+        *ngIf="sidebarOpen; else expandIcon"
+        class="ri-arrow-left-wide-line text-2xl"
+      ></i>
+
+      <ng-template #expandIcon>
+        <i class="ri-arrow-right-wide-line text-2xl"></i>
+      </ng-template>
     </button>
 
-    <!-- Titre -->
-    <span class="font-semibold text-lg text-gray-900 dark:text-gray-50">
-      Gest-Entreprise
+    <!-- Branding -->
+    <span
+      class="
+        font-semibold text-lg
+        text-[var(--color-secondary)]
+        tracking-wide
+        cursor-default
+      "
+    >
+      ALEXO
+      <span
+        class="
+          text-[var(--color-primary)]
+          transition-colors duration-300
+          hover:text-orange-600
+        "
+      >
+        GROUP
+      </span>
     </span>
   </div>
 
-  <!-- Right : actions + profil -->
+  <!-- RIGHT -->
   <div class="flex items-center gap-4">
-    <!-- Toggle thème -->
+
+    <!-- Theme toggle -->
     <button
-      class="p-2 rounded hover:bg-gray-100 dark:hover:bg-white/10 transition"
+      class="
+        p-2 rounded-full
+        text-[var(--color-text-muted)]
+        hover:bg-gray-200
+        hover:text-[var(--color-primary)]
+        hover:shadow-sm
+        transition-all duration-200
+        transform hover:-translate-y-[1px] hover:rotate-6
+      "
       (click)="toggleTheme()"
+      aria-label="Toggle theme"
     >
-      🌙
+      <i class="ri-moon-line text-xl"></i>
     </button>
 
     <!-- Notifications -->
-    <button class="relative p-2 rounded hover:bg-gray-100 dark:hover:bg-white/10 transition">
-      🔔
+    <button
+      class="
+        relative p-2 rounded-full
+        text-[var(--color-text-muted)]
+        hover:bg-gray-200
+        hover:text-[var(--color-primary)]
+        hover:shadow-sm
+        transition-all duration-200
+        transform hover:-translate-y-[1px] hover:scale-105
+      "
+      aria-label="Notifications"
+    >
+      <i class="ri-notification-line text-xl"></i>
+
       <span
-        class="absolute -top-1 -right-1 bg-[var(--color-primary)] text-white text-xs px-1 rounded-full"
+        class="
+          absolute -top-1 -right-1
+          bg-[var(--color-primary)]
+          text-white text-xs font-semibold
+          px-1.5 rounded-full
+          transition-transform duration-200
+          group-hover:scale-110
+        "
       >
         3
       </span>
     </button>
 
-    <!-- Profil utilisateur -->
-    <div class="flex items-center gap-2">
-      <div class="w-8 h-8 rounded-full bg-gray-300"></div>
-      <span class="text-sm font-medium text-gray-900 dark:text-gray-50">Alexandre</span>
+    <!-- Profil -->
+    <div
+      class="
+        flex items-center gap-2 cursor-pointer group
+        px-2 py-1 rounded-lg
+        hover:bg-gray-200
+        transition-all duration-200
+      "
+    >
+      <div
+        class="
+          w-8 h-8 rounded-full overflow-hidden
+          bg-gray-300
+          transition-all duration-200
+          group-hover:ring-2
+          group-hover:ring-[var(--color-primary)]
+          group-hover:scale-105
+        "
+      >
+        <img
+          src="assets/avatar.jpg"
+          alt="Profil"
+          class="w-full h-full object-cover"
+        />
+      </div>
+
+      <span
+        class="
+          text-sm font-medium
+          text-[var(--color-text)]
+          opacity-0 translate-x-1
+          group-hover:opacity-100 group-hover:translate-x-0
+          transition-all duration-300
+        "
+      >
+        Alexandre
+      </span>
     </div>
+
   </div>
 </header>

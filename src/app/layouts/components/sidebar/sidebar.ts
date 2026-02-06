@@ -1,12 +1,13 @@
 import { NgFor, NgIf } from '@angular/common';
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 
 const MENU = [
-  { label: 'Dashboard', route: '/dashboard' },
-  { label: 'Factures', route: '/invoices' },
-  { label: 'Clients', route: '/customers' }
+  { label: 'Dashboard', route: '/dashboard', icon: 'dashboard-line' },
+  { label: 'Factures', route: '/invoices', icon: 'file-list-3-line' },
+  { label: 'Clients', route: '/customers', icon: 'group-line' }
 ];
+
 
 @Component({
   selector: 'app-sidebar',
@@ -17,9 +18,14 @@ const MENU = [
 })
 export class Sidebar {
   @Input() collapsed = false;
+  @Output() navigate = new EventEmitter<void>();
   menu = MENU;
 
   onInit() {
     console.log('Sidebar initialized : ', this.menu);
+  }
+
+  onNavigate() {
+    this.navigate.emit(); // prévient le parent pour fermer le drawer mobile
   }
 }
