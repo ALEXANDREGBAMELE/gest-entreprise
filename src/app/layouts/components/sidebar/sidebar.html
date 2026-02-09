@@ -1,59 +1,62 @@
-<div class="h-full flex flex-col">
+<nav class="flex-1 px-2 py-4 space-y-1">
 
-  <!-- Logo -->
-  <div
-    class="h-16 flex items-center justify-center border-b border-white/10"
-  >
-    @if (!collapsed) {
-      <!-- Logo complet -->
-      <img
-        src="../../../assets/images/logo.png"
-        alt="Logo"
-        class="h-8 transition-all"
-      />
-    } @else {
-      <!-- Logo réduit -->
-      <img
-        src="../../../../assets/images/logo-icon.png"
-        alt="Logo"
-        class="h-8 transition-all"
-      />
-    }
-  </div>
+  <ng-container *ngFor="let item of menu">
+    <!-- Item simple -->
+    <ng-container *ngIf="!item.children; else dropdown">
+      <a
+        [routerLink]="item.route"
+        routerLinkActive="bg-white/10"
+        class="group flex items-center gap-3 px-3 py-2 rounded-lg
+               hover:bg-white/10 transition"
+        (click)="onNavigate()"
+      >
+        <i class="ri-{{ item.icon }} text-xl"></i>
 
-  <!-- Menu -->
-  <nav class="flex-1 px-2 py-4 space-y-1">
-    <a
-      *ngFor="let item of menu"
-      [routerLink]="item.route"
-      routerLinkActive="bg-white/10"
-      class="group flex items-center gap-3 px-3 py-2 rounded-lg
-             hover:bg-white/10 transition relative"
-      [title]="collapsed ? item.label : null"
-      (click)="navigate.emit()"
-    >
-      <!-- Icône -->
-      <i class="ri-{{ item.icon }} text-xl"></i>
+        @if (!collapsed) {
+          <span>{{ item.label }}</span>
+        }
+      </a>
+    </ng-container>
 
-      <!-- Texte -->
-      @if (!collapsed) {
-        <span class="whitespace-nowrap">
-          {{ item.label }}
-        </span>
-      }
+    <!-- Dropdown -->
+    <ng-template #dropdown>
+      <button
+        class="group flex items-center justify-between w-full
+               px-3 py-2 rounded-lg hover:bg-white/10 transition"
+        (click)="toggle(item)"
+      >
+        <div class="flex items-center gap-3">
+          <i class="ri-{{ item.icon }} text-xl"></i>
+          @if (!collapsed) {
+            <span>{{ item.label }}</span>
+          }
+        </div>
 
-      <!-- Tooltip custom (optionnel, plus clean que title) -->
-      @if (collapsed) {
-        <span
-          class="absolute left-full ml-2 px-2 py-1 text-sm rounded
-                 bg-black text-white opacity-0
-                 group-hover:opacity-100
-                 transition whitespace-nowrap"
-        >
-          {{ item.label }}
-        </span>
-      }
-    </a>
-  </nav>
+        @if (!collapsed) {
+  <i
+    class="transition-all duration-300"
+    [ngClass]="item.open ? 'ri-arrow-down-s-line rotate-0' : 'ri-arrow-right-s-line rotate-0'"
+  ></i>
+}
 
-</div>
+      </button>
+
+      <!-- Sous-menu -->
+      <div
+        class="overflow-hidden transition-all duration-300 ease-in-out"
+        [class.max-h-0]="!item.open"
+        [class.max-h-96]="item.open"
+      >
+        <div class="ml-8 mt-1 space-y-1">
+          <app-sidebar-submenu
+  [items]="item.children ?? []"
+  [collapsed]="collapsed"
+  [parentOpen]="item.open ?? false"
+  (navigate)="onNavigate()"
+/>
+        </div>
+      </div>
+    </ng-template>
+  </ng-container>
+
+</nav>

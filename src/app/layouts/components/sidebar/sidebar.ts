@@ -1,17 +1,16 @@
-import { NgFor, NgIf } from '@angular/common';
+import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { RouterLink, RouterLinkActive } from '@angular/router';
+import { IMenuItem, MENU } from '../../menu';
+import { SidebarSubmenu } from '../sidebar-submenu/sidebar-submenu';
 
-const MENU = [
-  { label: 'Dashboard', route: '/dashboard', icon: 'dashboard-line' },
-  { label: 'Factures', route: '/invoices', icon: 'file-list-3-line' },
-  { label: 'Clients', route: '/customers', icon: 'group-line' }
-];
+
+
 
 
 @Component({
   selector: 'app-sidebar',
-  imports: [RouterLink, RouterLinkActive,NgFor, NgIf],
+  imports: [RouterLink, RouterLinkActive, CommonModule, SidebarSubmenu],
   templateUrl: './sidebar.html',
   styleUrl: './sidebar.css',
   standalone: true
@@ -19,10 +18,13 @@ const MENU = [
 export class Sidebar {
   @Input() collapsed = false;
   @Output() navigate = new EventEmitter<void>();
-  menu = MENU;
+  menu: IMenuItem[] = MENU;
 
   onInit() {
     console.log('Sidebar initialized : ', this.menu);
+  }
+ toggle(item: IMenuItem) {
+    item.open = !item.open;
   }
 
   onNavigate() {
